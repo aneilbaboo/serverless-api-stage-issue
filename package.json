@@ -1,0 +1,14 @@
+{
+  "name": "api-stage-issue",
+  "version": "1.0.0",
+  "description": "Demonstrates buggy interaction between two serverless plugins",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-api-stage": "^1.3.0",
+    "serverless-domain-manager": "^2.3.6"
+  },
+  "dependencies": {
+    "serverless": "^1.26.1"
+  }
+}

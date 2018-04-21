@@ -1,0 +1,37 @@
+service:
+  name: apistageissue
+frameworkVersion: '>=1.21.0 <2.0.0'
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${env:STAGE}
+  region: us-east-1
+  profile: dev-profile-precisely
+plugins:
+  # if the following line is commented out, the problem goes away
+  - serverless-domain-manager
+  - serverless-api-stage
+custom:
+  customDomain:
+    domainName: ${env:STAGE}.${env:DOMAIN}
+    basePath: ''
+    stage: ${env:STAGE}
+    createRoute53Record: true
+    endpointType: regional
+  stageSettings:
+    CacheClusterEnabled: true
+    CacheClusterSize: '0.5'
+    Variables:
+      foo: bar
+    MethodSettings:
+      LoggingLevel: INFO
+      CachingEnabled: true
+      CacheTtlInSeconds: 3600
+functions:
+  Hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: api
+          method: get
+          cors: true
